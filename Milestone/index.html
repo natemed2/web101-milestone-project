@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- head
+
+        Purpose:
+        - Title used here shows up in the browser tab
+        - Link to the favicon (small image that appears in the browser tab)
+        - Link to the CSS file (used to style the webpage)
+
+        When To Modify:
+        - [ ] Project 2 (REQUIRED FEATURE) 
+        - [ ] Project 2 (STRETCH FEATURE) (favicon)
+        - [ ] Any time after
+        -->
+        <title>Climate Change Awareness</title>
+        <link rel="icon" href="data:image/jpeg;base64,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">
+        <link rel="stylesheet" href="reset.css">
+        <style>
+            h1 {
+    background-color: #8CC0DE;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 56px;
+    text-align: center;
+    color: #1B1B1B;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+button {
+    background-color: #FF7F50;
+    color: white;
+    font-size: 20px;
+    font-family: 'Verdana', sans-serif;
+    font-weight: bold;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 12px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #FF6347;
+}
+        </style>
+    </head>
+    
+    <body>
+    
+        <!-- navbar [PLACEHOLDER] [ADDED IN UNIT 4] -->
+
+        <!-- headings
+
+        Purpose:
+        - Main header section of the webpage
+        - Contains the title, subtitle, image, and key buttons for the webpage
+
+        When To Modify:
+        - [ ] Project 2 (REQUIRED FEATURE) 
+        - [ ] Project 3 (REQUIRED FEATURE) 
+        - [ ] Project 4 (REQUIRED FEATURE) 
+        - [ ] Any time after
+        -->
+        <img id="header-img" src="./img/logo500.png"/>
+        <h1>Climate Change Awareness</h1>
+        <h3>Act today for a sustainable tomorrow.</h3>
+        <h2>Subtitle</h2>
+        <button type="button">Learn More</button>
+        <button type="button">Take Action</button>
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Sv7OHfpIRfU?si=iJOgtPmPzivJY7EW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <!-- about
+
+        Purpose:
+        - Section for general info about the event
+        - Contains a video, description, and key points about the event
+
+        When To Modify:
+        - [ ] Project 2 (REQUIRED FEATURE) 
+        - [ ] Project 2 (STRETCH FEATURE) 
+        - [ ] Project 4 (STRETCH FEATURE) 
+        - [ ] Any time between / after
+        --> 
+        <h2>About the Event</h2>
+        <p>
+    Climate Change Awareness is a project designed to inform and inspire action against global warming. 
+    Our goal is to educate students, community members, and anyone concerned about the environment 
+    on the causes, effects, and solutions to climate change. 
+    Together, we can raise awareness and create meaningful change for future generations.
+</p>
+        <h3>What to Expect</h3>
+        <h4>Tag Line</h4>
+        <ul>
+            <li> <b>Bullet 1:</b> <i>Description</i></li>
+            <li> <b>Bullet 2:</b> <i>Description</i></li>
+            <li> <b>Bullet 3:</b> <i>Description</i></li>
+        </ul>
+
+        <!-- schedule
+
+        Purpose:
+        - Section for specific info about the event's schedule
+        - Contains images and descriptions of each activity
+
+        When To Modify:
+        - [ ] Project 2 (REQUIRED FEATURE) 
+        - [ ] Project 4 (STRETCH FEATURE) 
+        - [ ] Any time between / after
+        --> 
+        <h2>Event Schedule</h2>
+
+        <img src="./img/polarbear.jpg" alt="A polar bear on melting ice, showing the effects of global warming" width="400">
+        <h3>Melting Ice</h3>
+        <p>This image shows a polar bear stranded on melting ice, representing the devastating impact of climate change on Arctic wildlife.</p>
+            
+        <img src="./img/treeplanting.jpg" alt="Children planting trees to preserve a green environment and tackle climate change" width="400">
+        <h3>Community Action</h3>
+        <p>This illustration shows children planting trees as a way to restore nature and help fight climate change.</p>
+
+
+        <!-- rsvp [PLACEHOLDER] [ADDED IN UNIT 6] -->
+        <!-- success modal [PLACEHOLDER] [ADDED IN UNIT 9] --> 
+
+        <!-- links
+
+        Purpose:
+        - Links to other resources related to the event
+
+        When To Modify:
+        - [ ] Project 2 (STRETCH FEATURE) 
+        - [ ] Project 4 (STRETCH FEATURE) 
+        - [ ] Any time between / after
+        --> 
+        <h2>Links</h2>
+
+        <!-- This <a> block is one link.  Copy and paste all 6 lines to create another link. -->
+        <a class="block" href="https://www.un.org/en/climatechange/what-is-climate-change">
+            <article>
+                <h3>United Nations: What is Climate Change?</h3>
+                <p>Explains how human activities are driving long-term changes in Earth’s climate, leading to global warming and widespread impacts.</p>
+            </article>
+            <a class="block" href="https://www.bbc.com/news/articles/c9w15nggj58o">
+            <article>
+                <h3>BBC: A really simple guide to climate change</h3>
+                <p>explains how human activities are driving record global warming, its severe impacts on people and nature, and why urgent global action is needed to limit future risks.</p>
+                <a class="block" href="https://science.nasa.gov/climate-change/">
+            <article>
+                <h3>Climate Change - NASA</h3>
+                <p>NASA tracks Earth’s climate, showing how human activity drives global warming and its impacts.</p>
+            </article>
+                
+            </article>
+        </a>
+            
+        <!-- footer [PLACEHOLDER] [ADDED IN UNIT 3] -->
+        <!-- script [PLACEHOLDER] [ADDED IN UNIT 5] -->
+
+    </body>
+</html>

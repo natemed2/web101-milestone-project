@@ -1,0 +1,349 @@
+/*** VSCodeEDU preview fix ***/
+html {
+    background-color: var(--bg-color);
+}
+
+/*** body ***/
+body {
+    background-color: var(--bg-color);
+    font-size: 16px;
+    color: var(--text-color);
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    /* FIX: Increased top margin to push content fully below the fixed navbar (50px navbar height + 10px buffer) */
+    margin-top: 60px; 
+    padding: 0;
+}
+
+/*** Text ***/
+
+/* H1 - Main Title (Styled within the header container) */
+h1 {
+    background-color: transparent;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 32px;
+    text-align: left;
+    color: var(--accent-color-darkest);
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: none;
+    margin: 0;
+}
+
+/* H2 - Main Section Headers (Still centered) */
+h2 {
+    color: var(--accent-color-dark);
+    border-bottom: 3px solid var(--accent-color-medium);
+    border-bottom-style: double; 
+    padding-bottom: 5px;
+    margin-top: 50px;
+    text-align: center;
+    font-size: 32px;
+}
+
+/* H3 - Sub-Headers (Aesthetic: Left-aligned) */
+h3 {
+    color: var(--accent-color-medium);
+    font-style: italic;
+    font-size: 1.5em;
+    max-width: none;
+    margin: 5px 0 0 0; 
+    text-align: left;
+}
+
+/* H4 - Small Subtitles (Still centered) */
+h4 {
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* P - Paragraphs (FULL LEFT ALIGNMENT) */
+p {
+    line-height: 1.6;
+    padding: 0 20px;
+    text-align: left;
+    max-width: none;
+    margin: 10px 20px;
+}
+
+/* UL - Lists (FULL LEFT ALIGNMENT) */
+ul {
+    list-style-type: square;
+    padding-left: 60px;
+    line-height: 1.8;
+    margin: 20px 20px 20px 20px;
+    list-style-position: outside; 
+    text-align: left;
+    max-width: none;
+}
+
+/* A - Default link styling */
+a {
+    text-decoration: none;
+    color: var(--accent-color-medium);
+    transition: color 0.2s;
+}
+
+/* A: Pseudo-classes */
+a:link {
+    color: var(--accent-color-dark);
+}
+
+a:visited {
+    color: var(--accent-color-darkest);
+}
+
+a:hover {
+    color: var(--accent-color-medium);
+    text-decoration: underline;
+}
+
+a:active {
+    color: var(--accent-color-green);
+}
+
+/* A.block - Styling for the link card containers (Still centered) */
+a.block {
+    display: block;
+    text-decoration: none;
+    background-color: var(--card-bg-color);
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    border: 1px solid #ddd; 
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    color: var(--text-color);
+    transition: transform 0.2s;
+}
+
+a.block:hover {
+    transform: translateY(-3px);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* BUTTON - General button style */
+button {
+    background-color: var(--accent-color-medium);
+    color: white;
+    font-size: 20px;
+    font-family: 'Verdana', sans-serif;
+    font-weight: bold;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 12px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--accent-color-dark);
+}
+
+/*** Navigation bar (navbar) ***/
+.navbar ul {
+    /* Suggested Styling */
+    list-style-type: none; /* REQUIRED: Removes the bullet points */
+    overflow: hidden;    /* REQUIRED: Contains floated list items */
+    position: fixed;     /* REQUIRED: Keeps bar visible when scrolling */
+    top: 0;              /* REQUIRED: Positions bar at the top edge */
+    left: 0;             /* REQUIRED: Positions bar at the left edge */
+    width: 100%;         /* REQUIRED: Makes bar span the full screen width */
+    margin: 0;           /* Removes default top/bottom margin */
+    padding: 0;          /* Removes default left padding */
+    
+    /* Aesthetic Styling */
+    background-color: var(--accent-color-darkest); /* Dark background */
+    
+    z-index: 1000; /* Ensures the navbar is on top of other elements */
+}
+
+.navbar ul li {
+    /* This one is nested even further! */
+    float: left; /* REQUIRED: Makes the list items line up horizontally */
+    margin: 0;   /* Margin handled by padding on the <a> tag */
+}
+
+.navbar ul li a {
+    /* What do you think this one does? It styles the actual link text */
+    display: block;      /* REQUIRED: Makes the entire <li> area clickable */
+    text-decoration: none; /* REQUIRED: Removes underline from links */
+    
+    /* Aesthetic Styling */
+    color: var(--accent-color-medium); /* Use a contrasting color (orange) */
+    text-align: center;
+    padding: 14px 16px; /* Provides click target size and spacing */
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.navbar ul li a:hover {
+    /* This selector is a pseudo-class! */
+    /* Add at least one property that changes the appearance */
+    background-color: var(--accent-color-dark); /* Darkens on hover */
+    color: white; /* Changes text color for better contrast */
+    text-decoration: none;
+}
+
+/*** header ***/
+
+/* Step 1: Rename to header-container and use flexbox */
+/*** header ***/
+
+/* Step 1: Defines the Flex Container */
+.header-container { 
+    display: flex; /* REQUIRED: Enables Flexbox */
+    flex-direction: row; /* Arranges items side-by-side */
+    justify-content: space-between; /* Spreads items to the left and right edges */
+    align-items: center; 
+    
+    padding: 20px 5%; 
+    margin-bottom: 30px; 
+    
+    /* Header background color (the lighter blue box) */
+    background-color: var(--accent-color-light); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
+    text-align: left; 
+}
+
+/* Step 2: Styles the FIRST Flex Item (Image/Title area) using a pseudo-class */
+.header-item:nth-of-type(1) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1; /* Allows this item to take up most of the space */
+}
+
+/* Step 2: Styles the SECOND Flex Item (Buttons area) using a pseudo-class */
+.header-item:nth-of-type(2) {
+    text-align: right;
+    padding: 10px;
+}
+/* An id selector called header-img */
+img#header-img {
+    display: block;
+    margin: 0 20px 10px 0; 
+    width: 25%; 
+    max-width: 100px; 
+    height: auto;
+    border-radius: 50%;
+    border: 5px solid var(--accent-color-medium); 
+    transform: rotate(-1deg); 
+}
+
+/* A class selector called header-button */
+.header-button {
+    background-color: var(--accent-color-dark);
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px; 
+    margin: 5px;
+    border: 2px solid var(--accent-color-darkest);
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.header-button:hover {
+    background-color: var(--accent-color-medium);
+}
+
+/* Re-adjust H3 within the header for neatness */
+.header-container h3 { 
+    text-align: left;
+    margin: 0;
+}
+
+/* Override the general H2 style for the subtitle in the header */
+.header-container h2 { 
+    font-size: 20px;
+    border: none;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+
+/* iframe - Style the YouTube video */
+iframe {
+    display: block;
+    margin: 30px auto;
+    border-radius: 15px; 
+    overflow: hidden; 
+}
+
+
+/*** Schedule Section ***/
+
+/* Schedule Image styling */
+.schedule img { 
+    display: block;
+    margin: 20px auto; 
+    border: 3px solid var(--accent-color-dark); 
+    max-width: 350px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Clearfix for the schedule section */
+.schedule:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/*** footer ***/
+.footer { 
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    
+    background-color: var(--accent-color-darkest);
+    color: var(--bg-color);
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+    z-index: 1000; 
+}
+
+/* Style links specifically inside the footer */
+.footer a {
+    color: var(--accent-color-medium);
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.footer a:hover {
+    color: var(--accent-color-light);
+    text-decoration: underline;
+}
+
+/*** Custom Colors (OPTIONAL) ***/
+:root {
+    /* Light Mode */
+    --bg-color: #E0F7FA; /* Light Blue page background */
+    --text-color: #231942;
+    --card-bg-color: #FFFFFF; /* White card background */
+
+    /* Dark Mode (not yet implemented) */
+    --bg-color-dark-mode: #3e3377;
+    --text-color-dark-mode: #fff;
+
+    /* Accent Colors (Mapped to your original HTML colors) */
+    --accent-color-light: #8CC0DE;    /* Header background (the lighter blue box) */
+    --accent-color-medium: #FF7F50;  /* Orange/Coral */
+    --accent-color-dark: #FF6347;    
+    --accent-color-darkest: #1B1B1B; 
+    --accent-color-green: #28eb76;
+
+    /* Error Colors */
+    --error-color: #f8bbd0;
+    --error-color-border: #e63946;
+}

@@ -13,6 +13,7 @@ body {
     /* FIX: Increased top margin to push content fully below the fixed navbar (50px navbar height + 10px buffer) */
     margin-top: 60px; 
     padding: 0;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for dark mode */
 }
 
 /*** Text ***/
@@ -39,6 +40,7 @@ h2 {
     margin-top: 50px;
     text-align: center;
     font-size: 32px;
+    transition: color 0.3s;
 }
 
 /* H3 - Sub-Headers (Aesthetic: Left-aligned) */
@@ -49,6 +51,7 @@ h3 {
     max-width: none;
     margin: 5px 0 0 0; 
     text-align: left;
+    transition: color 0.3s;
 }
 
 /* H4 - Small Subtitles (Still centered) */
@@ -58,6 +61,7 @@ h4 {
     font-size: 1.2em;
     margin-top: 15px;
     text-align: center;
+    transition: color 0.3s;
 }
 
 /* P - Paragraphs (FULL LEFT ALIGNMENT) */
@@ -117,7 +121,7 @@ a.block {
     border-radius: 8px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     color: var(--text-color);
-    transition: transform 0.2s;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s, transform 0.2s;
 }
 
 a.block:hover {
@@ -137,7 +141,7 @@ button {
     border-radius: 12px;
     margin: 10px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 button:hover {
@@ -189,9 +193,20 @@ button:hover {
     text-decoration: none;
 }
 
-/*** header ***/
+/* Step 6: Custom Styling for the Theme Toggle Button (STRETCH) */
+button#theme-button {
+    /* Make the button visually distinct from other buttons */
+    background-color: var(--accent-color-darkest); 
+    color: var(--accent-color-medium);
+    border: 2px solid var(--accent-color-medium);
+    font-size: 16px; /* Slightly smaller text */
+}
 
-/* Step 1: Rename to header-container and use flexbox */
+button#theme-button:hover {
+    background-color: var(--accent-color-dark);
+    color: white;
+}
+
 /*** header ***/
 
 /* Step 1: Defines the Flex Container */
@@ -208,6 +223,7 @@ button:hover {
     background-color: var(--accent-color-light); 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
     text-align: left; 
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 /* Step 2: Styles the FIRST Flex Item (Image/Title area) using a pseudo-class */
@@ -325,6 +341,290 @@ iframe {
     text-decoration: underline;
 }
 
+/*** RSVP Section ***/
+
+/* Purpose:
+- Style rules for your website's RSVP form
+
+When To Modify:
+- [X] Project 6 (REQUIRED FEATURE)
+- [X] Project 7 (REQUIRED FEATURE)
+- [ ] Any time after
+*/
+
+/* REQUIRED: Styling for the input error class (Step 4) */
+.error {
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--error-color-border) !important; /* Red border */
+    background-color: var(--error-color) !important;     /* Light red background */
+}
+
+.rsvp-container {
+    display: flex; /* Enables Flexbox */
+    flex-direction: row; /* Arranges children side-by-side */
+    gap: 30px; /* Space between the two main columns */
+    width: 90%;
+    max-width: 1000px;
+    margin: 50px auto 0 auto; /* Center the container on the page */
+    
+    /* Adds rounded corners and a shadow for visual separation */
+    background-color: var(--card-bg-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* 1. Style for the descriptive paragraph column */
+.rsvp-para {
+    width: 45%; /* Adjusted width for better form space */
+    padding-right: 30px;
+    text-align: justify; 
+}
+
+/* 2. Style for the participants list column */
+.rsvp-participants {
+    width: 25%; /* Dedicated column for participants */
+    border-left: 2px solid var(--accent-color-light); /* Visual separator */
+    padding-left: 30px;
+    /* Reset margins/padding from general <p> tags */
+    margin: 0; 
+    padding-top: 5px; 
+    line-height: 1.4;
+    text-align: left;
+}
+
+/* Style the list items (the <p> tags inside the participants div) */
+.rsvp-participants p {
+    margin: 5px 0 5px 0; /* Reduced top/bottom margin for tight vertical packing */
+    padding: 0; /* Remove horizontal padding from general <p> rule */
+    text-align: left; /* Ensure text starts at the left */
+    line-height: 1.3;
+}
+
+/* 3. Style the Form element */
+#rsvp-form {
+    width: 30%; /* Dedicated space for the form */
+    padding: 20px;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-top: 0; /* Align with participants list */
+    transition: background-color 0.3s, box-shadow 0.3s;
+    
+    /* NEW: Use Flexbox to manage the inputs within the form */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* 4. Style the input groups to align labels and inputs */
+.form-inputs {
+    /* Changed from column to row for left-to-right alignment */
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15px;
+    /* Ensure inputs take full width of the form container */
+    width: 100%; 
+}
+
+.form-inputs label {
+    font-weight: bold;
+    margin-right: 10px;
+    /* Fixed width to ensure all labels align */
+    width: 100px; 
+    text-align: right;
+    margin-bottom: 0; /* Override general margin */
+}
+
+.form-inputs input {
+    padding: 8px;
+    border: 1px solid var(--accent-color-light);
+    border-radius: 5px;
+    font-size: 1em;
+    /* Let input fill the remaining space */
+    flex-grow: 1; 
+    width: auto; /* Overrides 95% width */
+}
+
+/* Adjust the Submit button */
+#rsvp-form button {
+    width: 100%;
+}
+
+
+/*** Dark Mode ***/
+
+/* Default dark mode style */
+.dark-mode {
+    /* REQUIRED RULE 1: Change the background color */
+    background-color: var(--bg-color-dark-mode); 
+    /* REQUIRED RULE 2: Change the text color */
+    color: var(--text-color-dark-mode); 
+}
+
+/* Dark Mode styling for H1, H2, H3, H4 */
+.dark-mode h1, 
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4 {
+    /* Change header text to white/light for contrast */
+    color: var(--text-color-dark-mode); 
+}
+
+/* Dark Mode styling for links (a) */
+.dark-mode a:link {
+    color: var(--accent-color-medium);
+}
+
+/* Dark Mode styling for visited links (a:visited) */
+.dark-mode a:visited {
+    color: var(--accent-color-light); 
+}
+
+/* Dark Mode styling for the Header box */
+.dark-mode .header-container {
+    background-color: var(--bg-color-dark-mode);
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Dark Mode styling for the Navbar */
+.dark-mode .navbar ul {
+    background-color: var(--accent-color-darkest);
+}
+
+/* Dark Mode styling for link cards (a.block) */
+.dark-mode a.block {
+    background-color: var(--bg-color-dark-mode); /* Use dark background */
+    border: 1px solid var(--accent-color-light); /* Light border for visibility */
+    color: var(--text-color-dark-mode); /* Light text */
+    box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode a.block:hover {
+    transform: translateY(-3px);
+    box-shadow: 4px 4px 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Dark Mode styling for all buttons */
+.dark-mode button {
+    border-color: var(--text-color-dark-mode);
+}
+
+/* Dark Mode RSVP specific styles */
+.dark-mode .rsvp-container {
+    background-color: var(--bg-color-dark-mode);
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .rsvp-participants {
+    border-left: 2px solid var(--accent-color-medium);
+}
+
+.dark-mode #rsvp-form {
+    background-color: var(--bg-color-dark-mode);
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .form-inputs input {
+    background-color: var(--bg-color-dark-mode);
+    color: var(--text-color-dark-mode);
+    border: 1px solid var(--accent-color-medium);
+}
+
+/*** Step 5: Implement Media Query (Responsive Design) ***/
+
+/* Applies to screens 768px wide or smaller (for tablets and phones) */
+@media (max-width: 768px) {
+    
+    /* 1. Stack header items vertically */
+    .header-container {
+        flex-direction: column;
+        align-items: center; /* Center everything when stacked */
+        text-align: center;
+        padding-top: 50px; /* Add extra padding to the top */
+    }
+
+    /* 2. Adjust the left item (image/title) to be centered and full width */
+    .header-item:nth-of-type(1) {
+        align-items: center;
+        flex-grow: initial; /* Reset growth */
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* 3. Center the image and remove custom margin */
+    img#header-img {
+        margin: 0 auto 10px auto; /* Center image horizontally */
+    }
+
+    /* 4. Center all H1, H3 elements that are inside the header */
+    .header-container h1,
+    .header-container h3 {
+        text-align: center;
+    }
+    
+    /* 5. Adjust the right item (buttons) to be centered and full width */
+    .header-item:nth-of-type(2) {
+        text-align: center;
+        width: 100%;
+        padding: 0;
+    }
+
+    /* 6. Make buttons full width for easy tapping on small screens */
+    .header-button {
+        display: block;
+        width: 80%;
+        margin: 10px auto;
+    }
+
+    /* Ensure the navbar links are stacked vertically on small screens */
+    .navbar ul li {
+        float: none;
+        width: 100%;
+    }
+
+    /* Responsive rule for RSVP section - stack columns vertically */
+    .rsvp-container {
+        flex-direction: column;
+        gap: 10px;
+        width: 95%; /* Make it wider on mobile */
+        padding: 20px;
+    }
+
+    .rsvp-para,
+    .rsvp-participants,
+    #rsvp-form {
+        width: 100%; /* Take full width when stacked */
+        padding-left: 0;
+        padding-right: 0;
+        margin-bottom: 15px;
+        /* Re-apply margin top for better stacking visual separation */
+        margin-top: 10px; 
+    }
+
+    .rsvp-participants {
+        border-left: none; /* Remove vertical line when stacked */
+        border-top: 1px solid var(--accent-color-light);
+        padding-top: 15px;
+    }
+    
+    /* Responsive adjustment for the form inputs: stack them vertically on mobile */
+    #rsvp-form .form-inputs {
+        width: 100%; /* Inputs take full width on mobile */
+        flex-direction: column; 
+    }
+    
+    #rsvp-form .form-inputs label {
+        width: auto;
+        text-align: left;
+    }
+    
+}
+
+
 /*** Custom Colors (OPTIONAL) ***/
 :root {
     /* Light Mode */
@@ -332,9 +632,9 @@ iframe {
     --text-color: #231942;
     --card-bg-color: #FFFFFF; /* White card background */
 
-    /* Dark Mode (not yet implemented) */
-    --bg-color-dark-mode: #3e3377;
-    --text-color-dark-mode: #fff;
+    /* Dark Mode variables */
+    --bg-color-dark-mode: #3e3377; /* Dark Purple/Blue background */
+    --text-color-dark-mode: #fff; /* White text for contrast */
 
     /* Accent Colors (Mapped to your original HTML colors) */
     --accent-color-light: #8CC0DE;    /* Header background (the lighter blue box) */

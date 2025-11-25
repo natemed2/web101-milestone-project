@@ -30,8 +30,8 @@ Purpose:
 
 When To Modify:
 - [ ] Project 4 (REQUIRED FEATURE)
-- [ ] Project 5 (REQUIRED FEATURE) 
-- [ ] Project 8 (STRETCH FEATURE) 
+- [X] Project 5 (REQUIRED FEATURE) 
+- [X] Project 8 (STRETCH FEATURE) 
 - [ ] Any time between / after
 -->
 <div class="navbar">
@@ -42,6 +42,10 @@ When To Modify:
         <li><a href="https://climate.nasa.gov/">NASA Climate</a></li>
         <li>
             <button id="theme-button" type="button" class="header-button">Toggle Dark Mode</button>
+        </li>
+        <!-- STRETCH FEATURE: Reduce Motion Button -->
+        <li>
+            <button id="motion-button" type="button" class="header-button">Reduce Motion</button>
         </li>
     </ul>
 </div>
@@ -61,65 +65,52 @@ When To Modify:
         </div>
 
         <iframe width="560" height="315" src="https://www.youtube.com/embed/Sv7OHfpIRfU?si=iJOgtPmPzivJY7EW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <!-- about
-
-        Purpose:
-        - Section for general info about the event
-        - Contains a video, description, and key points about the event
-
-        When To Modify:
-        - [ ] Project 2 (REQUIRED FEATURE) 
-        - [ ] Project 2 (STRETCH FEATURE) 
-        - [ ] Project 4 (STRETCH FEATURE) 
-        - [ ] Any time between / after
-        --> 
-        <h2 id="about-section">About the Event</h2>
-        <p>
-    Climate Change Awareness is a project designed to inform and inspire action against global warming. 
-    Our goal is to educate students, community members, and anyone concerned about the environment 
-    on the causes, effects, and solutions to climate change. 
-    Together, we can raise awareness and create meaningful change for future generations.
-</p>
-        <h3>What to Expect</h3>
         
-        <h4>Your Guide to Climate Action and Education</h4>
-        
-        <ul>
-            <li>
-                <b>Educational Sessions:</b> Engage with expert-led talks on the science behind global warming and its regional impacts.
-            </li>
-            <li>
-                <b>Community Workshops:</b> Participate in hands-on activities, like building small compost systems or planning tree-planting drives.
-            </li>
-            <li>
-                <b>Interactive Exhibits:</b> Explore data visualizations and models that show the future impacts of rising sea levels and temperature shifts.
-            </li>
-        </ul>
-
-        <!-- schedule
-
-        Purpose:
-        - Section for specific info about the event's schedule
-        - Contains images and descriptions of each activity
-
-        When To Modify:
-        - [ ] Project 2 (REQUIRED FEATURE) 
-        - [ ] Project 4 (STRETCH FEATURE) 
-        - [ ] Any time between / after
-        --> 
-        <h2 id="schedule-section">Event Schedule</h2>
-
-        <img src="./img/polarbear.jpg" alt="A polar bear on melting ice, showing the effects of global warming" width="400">
-        <h3>Melting Ice</h3>
-        <p>This image shows a polar bear stranded on melting ice, representing the devastating impact of climate change on Arctic wildlife.</p>
+        <!-- about -->
+        <!-- REQUIRED FEATURE: Added revealable class -->
+        <div class="revealable" id="about-section">
+            <h2>About the Event</h2>
+            <p>
+        Climate Change Awareness is a project designed to inform and inspire action against global warming. 
+        Our goal is to educate students, community members, and anyone concerned about the environment 
+        on the causes, effects, and solutions to climate change. 
+        Together, we can raise awareness and create meaningful change for future generations.
+    </p>
+            <h3>What to Expect</h3>
             
-        <img src="./img/treeplanting.jpg" alt="Children planting trees to preserve a green environment and tackle climate change" width="400">
-        <h3>Community Action</h3>
-        <p>This illustration shows children planting trees as a way to restore nature and help fight climate change.</p>
+            <h4>Your Guide to Climate Action and Education</h4>
+            
+            <ul>
+                <li>
+                    <b>Educational Sessions:</b> Engage with expert-led talks on the science behind global warming and its regional impacts.
+                </li>
+                <li>
+                    <b>Community Workshops:</b> Participate in hands-on activities, like building small compost systems or planning tree-planting drives.
+                </li>
+                <li>
+                    <b>Interactive Exhibits:</b> Explore data visualizations and models that show the future impacts of rising sea levels and temperature shifts.
+                </li>
+            </ul>
+        </div>
+
+        <!-- schedule -->
+        <!-- REQUIRED FEATURE: Added revealable class -->
+        <div class="revealable" id="schedule-section">
+            <h2>Event Schedule</h2>
+
+            <img src="./img/polarbear.jpg" alt="A polar bear on melting ice, showing the effects of global warming" width="400">
+            <h3>Melting Ice</h3>
+            <p>This image shows a polar bear stranded on melting ice, representing the devastating impact of climate change on Arctic wildlife.</p>
+                
+            <img src="./img/treeplanting.jpg" alt="Children planting trees to preserve a green environment and tackle climate change" width="400">
+            <h3>Community Action</h3>
+            <p>This illustration shows children planting trees as a way to restore nature and help fight climate change.</p>
+        </div>
 
 
         <!-- rsvp -->
-        <div id="rsvp-section">
+        <!-- REQUIRED FEATURE: Added revealable class -->
+        <div class="revealable" id="rsvp-section">
             <h2 id="rsvp-title">RSVP: Join the Global Action Crew</h2>
             <!-- RSVP Counter P Tag (Initial count of 3) -->
             <p id="rsvp-count" style="text-align: center; font-weight: bold; margin-bottom: 20px;">⭐ 3 people have RSVP'd to this event!</p>
@@ -160,38 +151,51 @@ When To Modify:
                 </form>
             </div>
         </div>
-        <!-- success modal [PLACEHOLDER] [ADDED IN UNIT 9] --> 
+        
+        <!-- success modal --> 
+        <!-- REQUIRED FEATURE: Modal that appears when a user successfully signs up for the event -->
+        <div id="success-modal" class="modal">
+            <div class="modal-container">
+                <div id="modal-item">
+                    <!-- Text element here -->
+                    <p id="modal-text">Thank you for RSVPing! We can't wait to see you at the event!</p>
+                    <!-- STRETCH FEATURE: Close Button -->
+                    <button id="modal-close-button" class="header-button">Close</button>
+                </div>
+                <div id="modal-item">
+                    <!-- Image element here (Melting Earth from provided URL) -->
+                    <img id="modal-image" 
+                         src="https://img.freepik.com/free-vector/global-warming-with-melting-earth_1308-42911.jpg?semt=ais_hybrid&w=740&q=80" 
+                         alt="Melting Earth Global Warming Icon">
+                </div>
+            </div>
+        </div>
 
-        <!-- links
-
-        Purpose:
-        - Links to other resources related to the event
-
-        When To Modify:
-        - [ ] Project 2 (STRETCH FEATURE) 
-        - [ ] Project 4 (STRETCH FEATURE) 
-        - [ ] Any time between / after
-        --> 
-        <h2 id="links-section">Links</h2>
-
-        <!-- This <a> block is one link.  Copy and paste all 6 lines to create another link. -->
-        <a class="block" href="https://www.un.org/en/climatechange/what-is-climate-change">
-            <article>
-                <h3>United Nations: What is Climate Change?</h3>
-                <p>Explains how human activities are driving long-term changes in Earth’s climate, leading to global warming and widespread impacts.</p>
-            </article>
+        <!-- links -->
+        <!-- REQUIRED FEATURE: Added revealable class -->
+        <div class="revealable" id="links-section">
+            <h2 id="links-section">Links</h2>
+            
+            <!-- This <a> block is one link.  Copy and paste all 6 lines to create another link. -->
+            <a class="block" href="https://www.un.org/en/climatechange/what-is-climate-change">
+                <article>
+                    <h3>United Nations: What is Climate Change?</h3>
+                    <p>Explains how human activities are driving long-term changes in Earth’s climate, leading to global warming and widespread impacts.</p>
+                </article>
+            </a>
             <a class="block" href="https://www.bbc.com/news/articles/c9w15nggj58o">
-            <article>
-                <h3>BBC: A really simple guide to climate change</h3>
-                <p>explains how human activities are driving record global warming, its severe impacts on people and nature, and why urgent global action is needed to limit future risks.</p>
-                <a class="block" href="https://science.nasa.gov/climate-change/">
-            <article>
-                <h3>Climate Change - NASA</h3>
-                <p>NASA tracks Earth’s climate, showing how human activity drives global warming and its impacts.</p>
-            </article>
-                
-            </article>
-        </a>
+                <article>
+                    <h3>BBC: A really simple guide to climate change</h3>
+                    <p>explains how human activities are driving record global warming, its severe impacts on people and nature, and why urgent global action is needed to limit future risks.</p>
+                </article>
+            </a>
+            <a class="block" href="https://science.nasa.gov/climate-change/">
+                <article>
+                    <h3>Climate Change - NASA</h3>
+                    <p>NASA tracks Earth’s climate, showing how human activity drives global warming and its impacts.</p>
+                </article>
+            </a>
+        </div>
             
        <div class="footer">
             <p>&copy; 2025 Climate Awareness Project | <a href="#about-section">Learn More</a> | <a href="#rsvp-section">Take Action</a></p>

@@ -45,11 +45,10 @@ const rsvpButton = document.getElementById('rsvp-button');
 let count = 3; 
 
 // Step 2: Write the code to manipulate the DOM here (CLEANED UP FOR VALIDATION)
-const addParticipant = () => {
-    // 1. Get the values from the input fields
-    const nameInput = document.getElementById('name').value;
-    const stateInput = document.getElementById('state').value;
-    const emailInput = document.getElementById('email').value; 
+// Refactored to accept the person object
+const addParticipant = (person) => {
+    // 1. Destructure the person object
+    const { name, hometown } = person;
 
     // --- STRETCH: RSVP Counter Logic ---
     
@@ -63,7 +62,7 @@ const addParticipant = () => {
     count = count + 1; 
 
     // 2. Create the new participant entry string
-    const newParticipantText = `${nameInput} from ${stateInput} is joining the crew!`;
+    const newParticipantText = `${name} from ${hometown} is joining the crew!`;
 
     // 3. Create a new <p> element using DOM methods
     const newParticipantElement = document.createElement('p');
@@ -110,9 +109,18 @@ const validateForm = (event) => {
     event.preventDefault(); 
     
     let containsErrors = false;
-    // rvspInputs will contain all elements within the rsvp-form
+    // rsvpInputs will contain all elements within the rsvp-form
     const rsvpInputs = document.getElementById("rsvp-form").elements; 
     
+    // Create person object (Step 1-A)
+    // FIX: Accessing input elements by their name attribute is crucial here.
+    const person = {
+        name: rsvpInputs.name.value,
+        hometown: rsvpInputs.state.value,
+        email: rsvpInputs.email.value.toLowerCase()
+    };
+
+
     // Loop through all form inputs (checking for min length of 2)
     for (let i = 0; i < rsvpInputs.length; i++) {
         const currentInput = rsvpInputs[i];
@@ -133,21 +141,19 @@ const validateForm = (event) => {
     
     // --- STRETCH FEATURE: Enhanced Email Validation Check (for @ and .com) ---
     const emailInput = document.getElementById('email');
-    const emailValue = emailInput.value.toLowerCase(); // Convert to lower case for reliable checking
     
     // Check if the email is invalid (missing @ OR missing .com)
-    if (!emailValue.includes('@') || !emailValue.includes('.com')) {
-        // If the email is invalid, set flag and apply error class
+    if (!person.email.includes('@') || !person.email.includes('.com')) {
         containsErrors = true;
         emailInput.classList.add('error');
     } else {
-        // If the email is valid, ensure error class is removed
         emailInput.classList.remove('error');
     }
     
-    // REQUIRED FEATURE: If no errors, call addParticipant()
+    // REQUIRED FEATURE: If no errors, call addParticipant() and toggle modal (Step 3)
     if (!containsErrors) {
-        addParticipant(); 
+        addParticipant(person); 
+        toggleModal(person); // Call the modal function with the personalized data
     }
 }
 
@@ -157,5 +163,149 @@ rsvpButton.removeEventListener('click', addParticipant);
 rsvpButton.addEventListener('click', validateForm);
 
 
-/*** Animations [PLACEHOLDER] [ADDED IN UNIT 8] ***/
-/*** Success Modal [PLACEHOLDER] [ADDED IN UNIT 9] ***/
+/*** Scroll Animations ***/
+  
+/* Purpose:
+- Use this starter code to add scroll animations to your website.
+
+When To Modify:
+- [X] Project 8 (REQUIRED FEATURE)
+- [ ] Any time after
+*/
+
+// Step 1: Select all elements with the class 'revealable'.
+let revealableContainers = document.querySelectorAll('.revealable');
+
+// Step 2: Write function to reveal elements when they are in view.
+const reveal = () => {
+    for (let i = 0; i < revealableContainers.length; i++) {
+        let current = revealableContainers[i];
+
+        // Get current height of container and window
+        let windowHeight = window.innerHeight;
+        let topOfRevealableContainer = current.getBoundingClientRect().top;
+        
+        // Get the reveal distance from the CSS variable
+        let revealDistance = parseInt(getComputedStyle(current).getPropertyValue('--reveal-distance'), 10);
+
+        // If the container is within range, add the 'active' class to reveal
+        if (topOfRevealableContainer < windowHeight - revealDistance) {
+            current.classList.add('active');
+        }
+        // If the container is not within range, hide it by removing the 'active' class
+        else { 
+            current.classList.remove('active');
+        }
+    }
+}
+
+// Step 3: Whenever the user scrolls, check if any containers should be revealed
+window.addEventListener('scroll', reveal);
+
+
+// STRETCH FEATURE: Reduce Motion Toggle (Controls scroll and modal animations)
+const motionButton = document.getElementById('motion-button');
+
+const reduceMotion = () => {
+    // Toggle the 'no-motion' class on the body. 
+    // The CSS handles disabling transitions/transforms when this class is present.
+    document.body.classList.toggle('no-motion');
+
+    // Update button text for user feedback
+    if (document.body.classList.contains('no-motion')) {
+        motionButton.textContent = 'Enable Motion';
+    } else {
+        motionButton.textContent = 'Reduce Motion';
+    }
+    // Call reveal once to ensure elements currently in view are visible when motion is disabled
+    reveal(); 
+}
+
+motionButton.addEventListener('click', reduceMotion);
+
+// Call reveal once on load to show elements already in view
+reveal(); 
+
+
+/*** Success Modal ***
+  
+  Purpose:
+  - Adds a pop-up modal to the website upon successful RSVP.
+  - Controls personalized message, image animation, and timed disappearance.
+***/
+
+// Animation variables and function (Step 5)
+let rotateFactor = 0;
+const modalImage = document.getElementById('modal-image');
+let intervalId; // Variable to hold the ID for the interval timer
+
+const animateImage = () => {
+    // Check if the body has the 'no-motion' class (Stretch Feature)
+    if (document.body.classList.contains('no-motion')) {
+        // If motion is reduced, stop the animation and set default state
+        clearInterval(intervalId);
+        modalImage.style.transform = 'rotate(0deg)';
+        return;
+    }
+    
+    // Toggle rotation between 0 and -10 degrees
+    if (rotateFactor === 0) {
+        rotateFactor = -10;
+    } else {
+        rotateFactor = 0;
+    }
+
+    // Apply the rotation factor to the image
+    modalImage.style.transform = `rotate(${rotateFactor}deg)`;
+}
+
+// Step 3 & 4: Toggle Modal function (show/hide and set timeout)
+const toggleModal = (person) => {
+    const modal = document.getElementById('success-modal');
+    const modalText = document.getElementById('modal-text');
+    
+    // Show the modal
+    modal.style.display = 'flex';
+
+    // Update modal text to two-sentence personalized message
+    modalText.textContent = `Thank you for joining the Global Action Crew, ${person.name} from ${person.hometown}! Your commitment is a crucial step toward a sustainable future.`;
+
+    // Start image animation (Step 5)
+    // Check if motion is enabled before starting the animation
+    if (!document.body.classList.contains('no-motion')) {
+        intervalId = setInterval(animateImage, 500); // Calls animateImage every 500ms
+    }
+
+    // Set modal timeout to 8 seconds
+    setTimeout(() => {
+        // Hide the modal after the timeout
+        modal.style.display = 'none';
+        
+        // Stop the animation interval (Step 5)
+        clearInterval(intervalId); 
+        
+        // Reset image rotation for next time
+        modalImage.style.transform = 'rotate(0deg)'; 
+        
+    }, 8000); // 8000 milliseconds = 8 seconds
+}
+
+// STRETCH FEATURE: Close button functionality (Step 6)
+const modalCloseButton = document.getElementById('modal-close-button');
+
+const closeModal = () => {
+    const modal = document.getElementById('success-modal');
+    
+    // Hide the modal
+    modal.style.display = 'none';
+    
+    // Stop the animation interval if it's running
+    if (intervalId) {
+        clearInterval(intervalId); 
+    }
+    
+    // Reset image rotation
+    modalImage.style.transform = 'rotate(0deg)';
+}
+
+modalCloseButton.addEventListener('click', closeModal);

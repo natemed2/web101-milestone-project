@@ -188,13 +188,13 @@ button:hover {
 .navbar ul li a:hover {
     /* This selector is a pseudo-class! */
     /* Add at least one property that changes the appearance */
-    background-color: var(--accent-color-dark); /* Darkens on hover */
+    background-color: var(--accent-color-dark);
     color: white; /* Changes text color for better contrast */
     text-decoration: none;
 }
 
 /* Step 6: Custom Styling for the Theme Toggle Button (STRETCH) */
-button#theme-button {
+button#theme-button, button#motion-button {
     /* Make the button visually distinct from other buttons */
     background-color: var(--accent-color-darkest); 
     color: var(--accent-color-medium);
@@ -202,7 +202,7 @@ button#theme-button {
     font-size: 16px; /* Slightly smaller text */
 }
 
-button#theme-button:hover {
+button#theme-button:hover, button#motion-button:hover {
     background-color: var(--accent-color-dark);
     color: white;
 }
@@ -534,7 +534,115 @@ When To Modify:
     border: 1px solid var(--accent-color-medium);
 }
 
-/*** Step 5: Implement Media Query (Responsive Design) ***/
+/*** Animations ****/
+/* Purpose:
+- Add style rules to enable scroll animations for your website
+
+When To Modify:
+- [X] Project 8 (REQUIRED FEATURE)
+- [ ] Any time after
+*/
+
+.revealable {
+    --reveal-distance: 150px; /* CSS Variable */
+
+    /* Initial state (hidden) */
+    scroll-margin-top: 0.1px; 
+    opacity: 0;
+    transition: all 2s ease;
+    position: relative;
+    transform: translateY(var(--reveal-distance));
+}
+
+.active {
+    /* Final state (visible) */
+    scroll-margin-top: 0;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* STRETCH FEATURE: Disable animations if body has the 'no-motion' class */
+.no-motion .revealable {
+    transition: none !important;
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+}
+
+/*** Success Modal ***
+  
+  Purpose:
+  - Add style rules to your website's pop-up modal, which appears
+    when a user successfully submits the RSVP form
+
+  When To Modify:
+  - [X] Project 9 (REQUIRED FEATURE)
+  - [ ] Project 9 (STRETCH FEATURE)
+  - [ ] Any time after
+***/
+.modal {
+  display: none;   /* modal should be hidden by default*/
+  position: fixed; /* modal cannot move around the screen */
+  z-index: 9999;   /* modal appears above everything else */ 
+  
+  /* Make the modal fill the entire screen */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Add a semi-transparent background to shadow non-modal elements*/
+  background-color: rgba(0,0,0,0.7); /* 70% opacity black */
+
+  /* Flexbox settings for modal to center content */
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-container {
+    /* Change modal size and spacing here */
+    padding: 30px;
+    width: 80%;
+    max-width: 500px;
+
+    /* Customize modal style here */
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: Arial, sans-serif;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+    /* Use flexbox to customize .modal-item layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#modal-text {
+    padding: 0;
+    margin: 20px 0;
+}
+
+#modal-image {
+    /* Adjust size for the new image */
+    width: 150px;
+    height: 150px; 
+    object-fit: contain; /* Ensure the image scales nicely */
+
+    border-radius: 50%;
+    border: 5px solid var(--accent-color-green);
+    margin-bottom: 20px;
+}
+
+/* Dark Mode Modal Styles */
+.dark-mode .modal-container {
+    background-color: var(--bg-color-dark-mode);
+    color: var(--text-color-dark-mode);
+}
+
+/*** Media Query (Responsive Design) ***/
 
 /* Applies to screens 768px wide or smaller (for tablets and phones) */
 @media (max-width: 768px) {
@@ -592,6 +700,11 @@ When To Modify:
         gap: 10px;
         width: 95%; /* Make it wider on mobile */
         padding: 20px;
+    }
+
+    /* Adjust modal for mobile */
+    .modal-container {
+        width: 90%;
     }
 
     .rsvp-para,
